@@ -34,8 +34,6 @@ To use the functions, include the `stats.h` header file in your C code and call 
 
 ## Testing
 
-A test QA file, `test_qa.c`, is provided to ensure the functions are working correctly. The test file can be compiled and run alongside the `stats.c` file.
-
 Additionally, a GitHub Actions workflow is set up to automatically run the tests whenever changes are pushed to the repository.
 
 ## Contributing
