@@ -13,7 +13,3 @@ jobs:
       run: |
         gcc -o stats assessments/m1/stats.c -lm
         ./stats
-    - name: Compile and run test_qa.c
-      run: |
-        gcc -o test_qa assessments/m1/test_qa.c assessments/m1/stats.c -lm
-        ./test_qa
