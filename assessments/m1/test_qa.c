@@ -58,10 +58,3 @@ void test_sort_array() {
 
     printf("test_sort_array passed!\n");
 }
-
-int main() {
-    test_print_statistics();
-    test_print_array();
-    test_sort_array();
-    return 0;
-}
