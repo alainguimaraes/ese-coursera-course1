@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
+
 #include "stats.h"
 #define SIZE (40)
 void test_print_statistics() {
