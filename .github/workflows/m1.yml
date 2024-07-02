@@ -11,5 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Compile and run tests
       run: |
-        gcc -o stats stats.c test_qa.c
+        gcc -o stats assessments/m1/stats.c assessments/m1/test_qa.c
         ./stats
