@@ -9,7 +9,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: Compile and run tests
+    - name: Compile and run stats.c
       run: |
-        gcc -o stats assessments/m1/stats.c assessments/m1/test_qa.c
+        gcc -o stats assessments/m1/stats.c
         ./stats
+    - name: Compile and run test_qa.c
+      run: |
+        gcc -o test_qa assessments/m1/test_qa.c assessments/m1/stats.c
+        ./test_qa
