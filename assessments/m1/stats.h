@@ -21,7 +21,7 @@
  */
 #ifndef __STATS_H__
 #define __STATS_H__
-
+#include <math.h>
 /**
  * @brief Prints the statistics of an array including minimum, maximum, mean, and median.
  *
