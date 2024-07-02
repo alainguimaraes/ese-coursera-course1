@@ -1,3 +1,4 @@
+[![m1](https://github.com/alainguimaraes/ese-coursera-course1/actions/workflows/m1.yml/badge.svg)](https://github.com/alainguimaraes/ese-coursera-course1/actions/workflows/m1.yml)
 # Statistics Functions
 
 Author: Alain Guimarães
