@@ -1,0 +1,81 @@
+000001d8 0000000c T atexit
+00202000 A _bsl_base_address
+200008d8 B __bss_end__
+20000874 B __bss_start__
+00000974 000000d8 T __call_exitprocs
+00000cb8 0000001a T cleanup_glue
+20000874 b completed.6523
+20000870 D __data_end__
+00000ddc A __data_load__
+20000000 D __data_start__
+00000000 t deregister_tm_clones
+00000044 t __do_global_dtors_aux
+00000da8 t __do_global_dtors_aux_fini_array_entry
+20000000 D __dso_handle
+00000dd0 r __EH_FRAME_BEGIN__
+200008d8 N end
+200008d8 N _end
+200008d8 N __end
+200008d4 00000004 B errno
+00000ddc R __etext
+00000ddc R __exidx_end
+00000dd4 R __exidx_start
+000001e4 00000020 T exit
+00000d78 00000002 T _exit
+20000898 b f2.4039
+00000da4 T _fini
+0000006c t frame_dummy
+00000d90 t __frame_dummy_init_array_entry
+00000dd0 r __FRAME_END__
+0000028c 00000010 T free
+00000ae8 000001d0 T _free_r
+00000164 00000074 T func
+20000890 b g1
+00000db4 00000004 R g2
+20000004 00000001 D g3
+20000894 00000001 B g4
+20000008 00000028 D g5
+00000dc8 00000004 R _global_impure_ptr
+200008d8 N __heap_end__
+200008d0 00000004 b heap_end.4169
+200008d8 N __HeapLimit
+200008d8 N __heap_start__
+20000038 00000428 d impure_data
+20000030 00000004 D _impure_ptr
+00000d98 T _init
+00000d98 T __init_array_end
+00000d90 T __init_array_start
+00000000 A _intvecs_base_address
+20000870 d __JCR_END__
+20000870 d __JCR_LIST__
+00000204 00000028 T __libc_fini_array
+0000022c 00000050 T __libc_init_array
+00200000 A _mailbox_base_address
+0000010c 00000058 T main
+000000a4 T _mainCRTStartup
+0000027c 00000010 T malloc
+20000460 00000408 D __malloc_av_
+200008a0 00000028 B __malloc_current_mallinfo
+000008a4 00000002 T __malloc_lock
+200008c8 00000004 B __malloc_max_sbrked_mem
+200008cc 00000004 B __malloc_max_total_mem
+0000029c 0000056c T _malloc_r
+20000868 00000004 D __malloc_sbrk_base
+2000089c 00000004 B __malloc_top_pad
+00000a4c 0000009c T _malloc_trim_r
+2000086c 00000004 D __malloc_trim_threshold
+000008a8 00000002 T __malloc_unlock
+00000808 0000009a T memset
+20000878 b object.6528
+00000cd4 00000088 T _reclaim_reent
+000008d0 000000a4 T __register_exitproc
+00000d7c 00000014 t register_fini
+00000020 t register_tm_clones
+00000d5c 0000001c T _sbrk
+000008ac 00000024 T _sbrk_r
+200008d8 N _stack
+200008d8 N __stack
+000000a4 T _start
+00201000 A _tlv_base_address
+20000874 D __TMC_END__
+20000000 A _vtable_base_address
