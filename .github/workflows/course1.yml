@@ -1,22 +1,21 @@
 name: Test Course1
 
-on:
+on: 
   push:
     branches:
-      - main  
+      - master
 
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [HOST] 
+        platform: [HOST]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Change to Course1 Directory
-        run: cd assessments/course1  # Navigate to the course1 directory
+        with:
+          path: assessments/course1 
 
       - name: Set up Build Environment
         run: |
@@ -29,7 +28,7 @@ jobs:
 
       - name: Compile and Run
         run: |
-          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE1=1
+          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE=1
           echo "Compilation complete for platform ${{ matrix.platform }}"
 
       - name: Check Test Results
