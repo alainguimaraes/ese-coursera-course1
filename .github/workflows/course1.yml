@@ -1,9 +1,6 @@
 name: Test Course1
 
-on:
-  push:
-    branches:
-      - main  # Or any other branch you want to trigger the workflow
+on: [push]
 
 jobs:
   build_and_test:
