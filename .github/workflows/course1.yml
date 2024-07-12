@@ -7,17 +7,18 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest  # Or any Linux environment
+    runs-on: ubuntu-latest 
     strategy:
       matrix:
-        platform: [HOST, MSP432] # Test on both platforms
+        platform: [HOST, MSP432] 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Set up Build Environment
-        # Adjust this step based on your toolchain setup
-        # Install required tools (gcc, arm-none-eabi-gcc, etc.)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi
 
       - name: Compile and Run
         run: |
@@ -38,7 +39,7 @@ jobs:
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v3
-        if: always() # Upload even if the job fails
+        if: always() 
         with:
           name: test-results-${{ matrix.platform }}
-          path: output.txt # Or the file where you save output
+          path: output.txt
