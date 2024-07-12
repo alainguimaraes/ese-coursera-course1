@@ -1,3 +1,4 @@
+[![Test Course1](https://github.com/alainguimaraes/ese-coursera-course1/actions/workflows/course1.yml/badge.svg)](https://github.com/alainguimaraes/ese-coursera-course1/actions/workflows/course1.yml)
 # Course 1
 
 This repository contains a set of utilities and functions for data manipulation, memory operations, and statistical analysis. It includes:
