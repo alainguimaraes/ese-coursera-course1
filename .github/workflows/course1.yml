@@ -7,26 +7,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [HOST] 
+        platform: [HOST]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Clean Build
         run: make clean
-        working-directory: assessments/course1
+        working-directory: assessments/course1  # Execute 'make clean' in this directory
 
       - name: Compile and Run
         run: |
-          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE1=1
-        working-directory: assessments/course1 # specify the directory where the Makefile is located
-
-      - name: Check Test Results
-        run: |
-          echo "Checking test results"
+          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE=1
           if ./Course1.out | grep -q "FAILED: 0 / 8"; then
             echo "All tests passed!"
           else
             echo "Some tests failed!"
             exit 1 
           fi
+        working-directory: assessments/course1  # Execute 'make' and './Course1.out' in this directory
