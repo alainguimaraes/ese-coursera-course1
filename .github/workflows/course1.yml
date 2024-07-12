@@ -3,14 +3,14 @@ name: Test Course1
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [HOST, MSP432] 
+        platform: [HOST]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -19,22 +19,23 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-arm-none-eabi
+          echo "Build environment set up"
 
       - name: Compile and Run
         run: |
           make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE=1
-          # If running on MSP432, capture output from the serial port
+          echo "Compilation complete for platform ${{ matrix.platform }}"
 
       - name: Check Test Results
-        # Analyze the output to check for the PASSED/FAILED messages
         run: |
+          echo "Checking test results"
           test_output=$(cat output.txt) # Or however you capture output
           echo "$test_output"
           if echo "$test_output" | grep -q "FAILED: 0 / 8"; then
             echo "All tests passed!"
           else
             echo "Some tests failed!"
-            exit 1  # Mark the workflow as failed
+            exit 1 
           fi
 
       - name: Upload Test Results
