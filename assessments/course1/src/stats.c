@@ -23,53 +23,11 @@
  *
  */
 
-
-
-#include <stdio.h>
-#include <math.h>
 #include "stats.h"
-
+#include <math.h>
 /* Size of the Data Set */
 #define SIZE (40)
 
-
-void main() {
-    unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
-                                114, 88,   45,  76, 123,  87,  25,  23,
-                                200, 122, 150, 90,   92,  87, 177, 244,
-                                201,   6,  12,  60,   8,   2,   5,  67,
-                                  7,  87, 250, 230,  99,   3, 100,  90};
-
-    // Print the original array
-    printf("Original array: ");
-    print_array(test, SIZE);
-
-    // Calculate and print the statistics
-    print_statistics(test, SIZE);
-}
-
-
-void print_statistics(unsigned char *ptr, unsigned int size) {
-    if (ptr == NULL || size == 0) {
-        printf("Error: Invalid input dataset.\n");
-        return;
-    }
-    printf("Minimum: %d (index: %d)\n", (int)find_minimum(ptr, size), find_minimum_index(ptr, size));
-    printf("Maximum: %d (index: %d)\n", (int)find_maximum(ptr, size), find_maximum_index(ptr, size));
-    printf("Mean: %d\n", (int)find_mean(ptr, size));
-    printf("Median: %d (index: %d)\n", (int)find_median(ptr, size), find_median_index(ptr, size));
-}
-
-void print_array(unsigned char *ptr, unsigned int size)
-{
-    unsigned int i;
-    printf("{");
-    for (i = 0; i < size; i++)
-    {
-        printf("%d, ", *(ptr + i));
-    }
-    printf("}\n");
-}
 unsigned int find_minimum_index(unsigned char *ptr, unsigned int size) {
     if (ptr == NULL || size == 0) {
         return 0;
@@ -120,42 +78,33 @@ unsigned int find_median_index(unsigned char *ptr, unsigned int size) {
     return size / 2;
 }
 
-unsigned char find_median(unsigned char *ptr, unsigned int size)
-{
+unsigned char find_median(unsigned char *ptr, unsigned int size) {
     if (ptr == NULL || size == 0) {
         return 0;
     }
-
-    unsigned char temp;
-    unsigned int i, j;
-    for (i = 0; i < size - 1; i++)
-    {
-        for (j = 0; j < size - i - 1; j++)
-        {
-            if (*(ptr + j) > *(ptr + j + 1))
-            {
-                temp = *(ptr + j);
-                *(ptr + j) = *(ptr + j + 1);
-                *(ptr + j + 1) = temp;
-            }
-        }
+    sort_array(ptr, size);
+    
+    // Calculate median without using round
+    if (size % 2 == 0) { // even
+        return (unsigned char)((*(ptr + (size / 2) - 1) + *(ptr + (size / 2))) / 2); 
+    } else {            // odd
+        return *(ptr + (size / 2)); 
     }
-    return (unsigned char)round(*(ptr + size / 2));
 }
 
-unsigned char find_mean(unsigned char *ptr, unsigned int size)
-{
+unsigned char find_mean(unsigned char *ptr, unsigned int size) {
     if (ptr == NULL || size == 0) {
         return 0;
     }
 
     unsigned int sum = 0;
     unsigned int i;
-    for (i = 0; i < size; i++)
-    {
+    for (i = 0; i < size; i++) {
         sum += *(ptr + i);
     }
-    return (unsigned char)round((float)sum / size);
+
+    // Calculate mean without using round, handle rounding manually
+    return (unsigned char)((sum + size / 2) / size); // Add size/2 for rounding
 }
 
 unsigned char find_maximum(unsigned char *ptr, unsigned int size)
@@ -172,7 +121,7 @@ unsigned char find_maximum(unsigned char *ptr, unsigned int size)
             max = *(ptr + i);
         }
     }
-    return (unsigned char)round(max);
+    return max;
 }
 
 unsigned char find_minimum(unsigned char *ptr, unsigned int size)
@@ -190,7 +139,7 @@ unsigned char find_minimum(unsigned char *ptr, unsigned int size)
             min = *(ptr + i);
         }
     }
-    return (unsigned char)round(min);
+    return min;
 }
 
 void sort_array(unsigned char *ptr, unsigned int size)
@@ -214,4 +163,23 @@ void sort_array(unsigned char *ptr, unsigned int size)
         }
     }
 }
-
+void print_statistics(unsigned char *ptr, unsigned int size) {
+    if (ptr == NULL || size == 0) {
+        PRINTF("Error: Invalid input dataset.\n"); // Use PRINTF
+        return;
+    }
+    PRINTF("Minimum: %d (index: %d)\n", (int)find_minimum(ptr, size), find_minimum_index(ptr, size)); // Use PRINTF
+    PRINTF("Maximum: %d (index: %d)\n", (int)find_maximum(ptr, size), find_maximum_index(ptr, size)); // Use PRINTF
+    PRINTF("Mean: %d\n", (int)find_mean(ptr, size));   // Use PRINTF
+    PRINTF("Median: %d (index: %d)\n", (int)find_median(ptr, size), find_median_index(ptr, size)); // Use PRINTF
+}
+void print_array(unsigned char *ptr, unsigned int size) {
+    #ifdef VERBOSE  // Check if VERBOSE is defined
+        unsigned int i;
+        PRINTF("{");  // Use PRINTF macro
+        for (i = 0; i < size; i++) {
+            PRINTF("%d, ", *(ptr + i)); 
+        }
+        PRINTF("}\n"); 
+    #endif  // No printing if VERBOSE is not defined
+}

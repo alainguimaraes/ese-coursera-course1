@@ -18,8 +18,13 @@
  *
  * @author Alex Fosdick
  * @date April 1 2017
+ * Refactor:
+ * @author Alain Guimarães
+ * @date: July 12 2024
  *
  */
+#include <stdlib.h>
+#include <stdint.h>
 #include "memory.h"
 
 /***********************************************************
@@ -48,3 +53,63 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+uint8_t *my_memmove(uint8_t *src, uint8_t *dst, size_t length) {
+    if (src == dst || length == 0) {
+        return dst;
+    }
+
+    uint8_t *ret = dst;
+
+    if (src < dst) {
+        // Copy from the end to the beginning to handle overlapping scenario
+        // where source is before the destination
+        src += length;
+        dst += length;
+        while (length--) {
+            *--dst = *--src;
+        }
+    } else {
+        // Copy from the beginning to the end for overlapping scenario
+        // where source is after the destination
+        while (length--) {
+            *dst++ = *src++;
+        }
+    }
+
+    return ret;
+}
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) { 
+    #
+    return my_memmove(src, dst, length);
+
+} 
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
+    uint8_t *ptr = src;
+    while (length--) {
+        *ptr++ = value;
+    }
+    return src;
+}
+
+uint8_t * my_memzero(uint8_t * src, size_t length) {
+    return my_memset(src, length, 0);
+}
+
+uint8_t * my_reverse(uint8_t * src, size_t length) {
+    uint8_t *start = src, *end = src + length - 1;
+    while (start < end) {
+        uint8_t temp = *start;
+        *start++ = *end;
+        *end-- = temp;
+    }
+    return src;
+}
+uint32_t * reserve_words(size_t length) { //Changed from int32_t to uint32_t
+  return (uint32_t *)malloc(length * sizeof(uint32_t)); 
+}
+
+void free_words(uint32_t * src) {  //Changed from int32_t to uint32_t
+  free(src);
+}

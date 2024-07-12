@@ -12,8 +12,8 @@
  * @file course1.c 
  * @brief This file is to be used to course 1 final assessment.
  *
- * @author Alain Guimaraes
- * @date July 12 2024
+ * @author Alex Fosdick
+ * @date April 2, 2017
  *
  */
 
@@ -23,7 +23,8 @@
 #include "memory.h"
 #include "data.h"
 #include "stats.h"
-
+#define BASE_10 10
+#define BASE_16 16
 int8_t test_data1() {
   uint8_t * ptr;
   int32_t num = -4096;

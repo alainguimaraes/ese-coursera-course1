@@ -36,14 +36,15 @@
 include sources.mk
 
 # Set default platform to HOST
-ifndef PLATFORM
- PLATFORM = HOST
-endif
+PLATFORM?=HOST
+ifndef COURSE1
+ COURSE1 = 1
+endif   # Default to enabling COURSE1
 
 # Define common flags and variables
 CFLAGS += -Wall -Werror -g -O0 -std=c99
 LDFLAGS += $(LDFLAGS_ARCH)
-TARGET = c1m2.out
+TARGET = Course1.out
 OBJS = $(SOURCES:.c=.o)
 DEPS = $(SOURCES:.c=.d)
 
@@ -53,7 +54,7 @@ ifeq ($(PLATFORM),MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	SIZE = arm-none-eabi-size
-	LINKER_FILE =../msp432p401r.lds
+	LINKER_FILE =msp432p401r.lds
 	CPU = cortex-m4
 	ARCH = thumb
 	SPECS = --specs=nosys.specs
@@ -69,11 +70,21 @@ else ifeq ($(PLATFORM),HOST)
 	OBJDUMP = objdump
 	CFLAGS += -DHOST
 	CPPFLAGS += $(INCLUDES_HOST)
-	LDFLAGS_ARCH = -Wl,-Map=$(TARGET).map -lc --entry=main
+	LDFLAGS_ARCH = -Wl,-Map=$(TARGET).map -lc 
 else
     $(error Unsupported platform: $(PLATFORM))
 endif
 
+
+# COURSE1 Flag (Now outside the platform ifeq blocks)
+ifeq ($(COURSE1),1)  
+    CFLAGS += -DCOURSE1  
+endif
+
+# VERBOSE Flag (Now outside the platform ifeq blocks)
+ifeq ($(VERBOSE),1)
+    CFLAGS += -DVERBOSE  
+endif
 # Output file targets
 .PHONY: all clean size compile-all build disasm
 
