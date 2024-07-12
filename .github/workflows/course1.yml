@@ -1,9 +1,5 @@
 name: Test Course1
-
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build_and_test:
