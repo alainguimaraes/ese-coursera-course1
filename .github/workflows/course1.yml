@@ -1,51 +1,35 @@
 name: Test Course1
 
-on: 
+on:
   push:
     branches:
-      - master
+      - main  # Or any other branch you want to trigger the workflow
 
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [HOST]
+        platform: [HOST] 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          path: assessments/course1 
 
-      - name: Set up Build Environment
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-arm-none-eabi
-          echo "Build environment set up"
-          
       - name: Clean Build
         run: make clean
+        working-directory: assessments/course1
 
       - name: Compile and Run
         run: |
-          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE=1
-          echo "Compilation complete for platform ${{ matrix.platform }}"
+          make PLATFORM=${{ matrix.platform }} VERBOSE=1 COURSE1=1
+        working-directory: assessments/course1 # specify the directory where the Makefile is located
 
       - name: Check Test Results
         run: |
           echo "Checking test results"
-          test_output=$(cat output.txt) # Or however you capture output
-          echo "$test_output"
-          if echo "$test_output" | grep -q "FAILED: 0 / 8"; then
+          if ./Course1.out | grep -q "FAILED: 0 / 8"; then
             echo "All tests passed!"
           else
             echo "Some tests failed!"
             exit 1 
           fi
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v3
-        if: always() 
-        with:
-          name: test-results-${{ matrix.platform }}
-          path: output.txt
